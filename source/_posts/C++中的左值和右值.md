@@ -5,6 +5,9 @@ categories:
   - C++
 tags:
   - 语义
+  
+copyright: true
+
 ---
 # 基本概念
 ***
@@ -31,6 +34,7 @@ tags:
 ***
   C++ 中值类别分为：泛左值、右值、左值、将亡值、纯右值。不同值类型别间的关系，见下图:
   
+  <center>
   ```mermaid
   graph TD
   A[值类型] --> B[glvalue]
@@ -40,6 +44,7 @@ tags:
   C-->xvalue
   C-->prvalue
   ```
+  </center>
 ## 值类别的定义
 
 以下内容引用自 [cppreference](https://zh.cppreference.com/w/cpp/language/value_category#.E5.8E.86.E5.8F.B2)
