@@ -92,6 +92,9 @@ mermaid: ## mermaid url https://github.com/knsv/mermaid
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
+- type: git
   repo: https://github.com/floatval/floatval.github.io
+  branch: master
+- type: git
+  repo: git@27.102.118.39:hexo.git
   branch: master
