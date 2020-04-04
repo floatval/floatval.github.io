@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SSH,密钥登陆,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="VPS 安全防护的原因VPS 因为具有公网 IP，且大多数私人用的 VPS 没有很好的管理习惯。所以有很多的人，在网上对暴露在公网上的 VPS 进行扫描，暴力 SSH 破解。进而实现包括但不限于：以 VPS 作为肉鸡、单纯的破坏 VPS、窃取 VPS 中的信息、挖矿 等目的。 为了更好的保护 VPS 的资源，避免 VPS 被别人用作其他用途，对 VPS 进行一定程度的安全防护设置是非常必要的。 V">
+<meta name="keywords" content="SSH,密钥登陆">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VPS 网络防护">
+<meta property="og:url" content="https://muum.me/2020/03/22/VPS-网络防护/index.html">
+<meta property="og:site_name" content="君子慎独">
+<meta property="og:description" content="VPS 安全防护的原因VPS 因为具有公网 IP，且大多数私人用的 VPS 没有很好的管理习惯。所以有很多的人，在网上对暴露在公网上的 VPS 进行扫描，暴力 SSH 破解。进而实现包括但不限于：以 VPS 作为肉鸡、单纯的破坏 VPS、窃取 VPS 中的信息、挖矿 等目的。 为了更好的保护 VPS 的资源，避免 VPS 被别人用作其他用途，对 VPS 进行一定程度的安全防护设置是非常必要的。 V">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-04T13:41:25.618Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VPS 网络防护">
+<meta name="twitter:description" content="VPS 安全防护的原因VPS 因为具有公网 IP，且大多数私人用的 VPS 没有很好的管理习惯。所以有很多的人，在网上对暴露在公网上的 VPS 进行扫描，暴力 SSH 破解。进而实现包括但不限于：以 VPS 作为肉鸡、单纯的破坏 VPS、窃取 VPS 中的信息、挖矿 等目的。 为了更好的保护 VPS 的资源，避免 VPS 被别人用作其他用途，对 VPS 进行一定程度的安全防护设置是非常必要的。 V">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://muum.me/2020/03/22/VPS-网络防护/">
+
+
+
+
+
+  <title>VPS 网络防护 | 君子慎独</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">君子慎独</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://muum.me/2020/03/22/VPS-网络防护/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="佚">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://muumblog-1300224739.file.myqcloud.com/cbbw7-buakk.svg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="君子慎独">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">VPS 网络防护</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-22T20:05:05+08:00">
+                2020-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/03/22/VPS-网络防护/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/22/VPS-网络防护/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="VPS-安全防护的原因"><a href="#VPS-安全防护的原因" class="headerlink" title="VPS 安全防护的原因"></a>VPS 安全防护的原因</h1><p>VPS 因为具有公网 IP，且大多数私人用的 VPS 没有很好的管理习惯。所以有很多的人，在网上对暴露在公网上的 VPS 进行扫描，暴力 SSH 破解。进而实现包括但不限于：以 VPS 作为肉鸡、单纯的破坏 VPS、窃取 VPS 中的信息、挖矿 等目的。</p>
+<p>为了更好的保护 VPS 的资源，避免 VPS 被别人用作其他用途，对 VPS 进行一定程度的安全防护设置是非常必要的。</p>
+<h1 id="VPS-防护的手段"><a href="#VPS-防护的手段" class="headerlink" title="VPS 防护的手段"></a>VPS 防护的手段</h1><p>VPS 防护的手段常见方式不外乎两种：<br>0x00. 设置防火墙</p>
+<ul>
+<li>过滤恶意流量，防止服务器被爆破。</li>
+</ul>
+<p>0x01. 私钥登陆</p>
+<ul>
+<li>更改 SSH 默认端口，防止 SSH 暴力破解</li>
+<li>设置私钥登陆，并禁止使用密码和 root 账号登陆<a id="more"></a>
+
+</li>
+</ul>
+<h1 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a>设置防火墙</h1><p>PS: 下面以 Debian 系列进行说明。<br>设置防火墙屏蔽不必要的端口，可以屏蔽绝大多数的恶意流量。大大的加强 VPS 的安全性。</p>
+<h2 id="安装配置-ufw-防火墙工具"><a href="#安装配置-ufw-防火墙工具" class="headerlink" title="安装配置 ufw 防火墙工具"></a>安装配置 ufw 防火墙工具</h2><p>0x00. <code>su</code></p>
+<p>0x01. <code>sudo apt install ufw</code></p>
+<p>0x02. <code>systemctl enable ufw</code><br>       命令解释：开启 ufw 的自动启动。这样不用在每次开关机后，再次手动重启 ufw 的服务。</p>
+<p>0x03. <code>systemctl start ufw</code><br>       命令解释：开启 ufw</p>
+<p>0x04. <code>ufw status</code><br>       命令解释：查看当前 ufw 的状态</p>
+<p>0x05. <code>ufw allow ssh</code><br>      命令解释：允许 ssh 协议流量通过防火墙，并开放默认的 ssh 端口（22）</p>
+<p>0x06. <code>ufw status</code><br>       命令解释：查看 ssh 规则是否添加成功。</p>
+<p>PS：ufw 有很多设置方式：比如可以直接指定要开发的端口 ufw allow 端口号，可以指定协议等。详细请参考 man ufw</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>现在防火墙已经打开，所有访问非 22 端口的流量，或则以非 ssh 协议访问 22 端口的流量，均会被防火墙自动拦截。这样就可以过滤绝大部分的恶意流量了。<br>但是还是无法方式 SSH 暴力破解，这一让人头疼的问题。防止 SSH 暴力破解的方案，放在下面的 证书登陆中了。</p>
+<h1 id="私钥登陆"><a href="#私钥登陆" class="headerlink" title="私钥登陆"></a>私钥登陆</h1><p>原理：简单来说就是一句话：<code>非对称加密的密钥具有一对一的特性。一个公钥，加密后的内容，只能被其对应的私钥进行解密</code>。<br>而我们在 VPS 上利用证书登陆，就是利用了这一特性。</p>
+<p>具体使用分为 3 部分：<br>    1. 证书的生成<br>    2. authorized_keys 设置<br>    3. 相关文件的权限设置</p>
+<h2 id="私钥的生成"><a href="#私钥的生成" class="headerlink" title="私钥的生成"></a>私钥的生成</h2><p>注意：VPS 新建用户不推荐加入 sudo 组中，以便做好用户的权限隔离。以下均在要生成密钥的用户下执行。即：要在 A 生成密钥，请切换到 A 用户再去执行下面的命令。</p>
+<p>0x00. <code>mkdir ~/.ssh</code><br>    命令解释：在自己的家目录下，新建名为 .ssh 的目录。</p>
+<p>0x01. 执行 <code>ssh-keygen -t rsa -b 4096 -C &quot;注释信息，便于理解密钥用处，一般为邮件地址</code><br>         - 命令解释：<br>            <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">usage: ssh-keygen [-q] [-b bits] [-t dsa | ecdsa | ed25519 | rsa]</span><br><span class="line">                  [-N new_passphrase] [-C comment] [-f output_keyfile]</span><br></pre></td></tr></table></figure></p>
+<pre><code>通过 ssh 的帮助文档中的第一、二行，我们可以清楚的看到 ssh-keygen 常用的参数的含义：
+-t 选项：生成的密钥的类型
+-b 选项：生成的密钥的长度单位为 bit
+-C 选项：生成的密钥的注释信息</code></pre><p>0x02. <code>Enter file in which to save the key:</code> 选择密钥的存放位置，一般默认即可。可以通过绝对、相对路径来指定。</p>
+<p>0x03. <code>Enter passphrase (empty for no passphrase):</code> 如果不需要利用密码对生成的密钥进行加密，回车即可。<br>    PS：如果输入了密码，每次在用密钥进行登陆时，也会要求输入密码，用以解锁加密的密钥。</p>
+<p>0x04. 下面就是密钥的指纹密码了。可以忽略。</p>
+<p>0x05.  <code>touch ~/.ssh/authorized_keys &amp;&amp; cat id_rsa.pub &gt;&gt; authoried_keys</code><br>        命令解释：在 .ssh 目录下新建 authorized_keys 的文件，并将 id_rsa.pub (上面生成的密钥中的公钥) 添加 authorized_keys 文件<br>        的末行后。<br>0x06. <code>chomod 700 .ssh &amp;&amp; chmod 600 .ssh/authorized_keys</code><br>        命令解释：改变 .ssh 和 authorized_keys 的权限为：700 属主可读写运行，属组和其他用户无权限，600 属主可读写，属组和其他用户无权限<br>        PS: 这一步不是必须的，但是推荐这么做。可以避免一些权限的问题。</p>
+<p>0x07. 保存公钥对应的私钥到本地。并在 authorized_keys 文件中，公钥信息的上面以 <code>#</code> 开头添加注释信息。推荐：注释信息为对应使用该密钥登陆的用户名</p>
+<p>0x08. 在不同的用户中重复执行 0x00-0x04 和 0x06 步骤。0x05 步骤需要部分改变</p>
+<p>0x09. 改变后的 0x05 步骤：同样的先执行 0x05 的命令。然后追加 <code>cat /home/othername/.ssh/authorized_keys &gt;&gt; .ssh/authorized_keys</code><br>      命令解释：将 othername 换为你的其他有密钥的用户的用户名，将其他用户的 authorized_keys 的内容追加到当前的 authorized_keys 中。</p>
+<p>0x0A. 还有其他用户参考上面同理。</p>
+<h3 id="设置允许私钥登陆并进行-SSH-配置"><a href="#设置允许私钥登陆并进行-SSH-配置" class="headerlink" title="设置允许私钥登陆并进行 SSH 配置"></a>设置允许私钥登陆并进行 SSH 配置</h3><p>0x00. <code>su</code><br>0x01. <code>vi /etc/ssh/sshd_config</code></p>
+<ul>
+<li>找到 <code>AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2</code> 将前面的 <code>#</code> 号去掉。<br>PS: 如果没解除该句的注释，那么只能用最后一次生成的密钥来登陆最后一个生成密钥的用户。或则，所有用户利用相同的密钥来进行登陆。无法实现不同用户使用不同的密钥来进行登陆。<br>原因：参考 ssh 认证中，会从 authorized_keys 中读取存放的公钥信息。来对进行登陆的用户的私钥进行检查。即使你不去设置 authorized_keys 文件，系统仍然会默认在你第一次用密钥登陆时，在该用户的 .ssh 目录下，生成 authorized_keys 文件。</li>
+</ul>
+<p>0x02. <code>systemctl restart sshd</code> 重启 SSH 服务。</p>
+<p>0x03. 测试所有用户用密钥登陆: <code>ssh -i 证书位置 username@ip</code> 成功后进行下一步，不成功，请确认是否正确完成了上面的所有操作。</p>
+<ul>
+<li>如果不行，可以用密码登陆 root 用户从头再来。</li>
+</ul>
+<p>0x04. 执行 0x01</p>
+<ul>
+<li>找到 <code>Port 22</code> 更改为 <code>Port 你想用的端口</code> 推荐大于 1024,因为 1024 及以下的端口 Linux 系统作为保留。一定要小于 65535。</li>
+<li>执行 0x02</li>
+<li><strong>切换到 root 用户执行 ufw allow 你想用的端口号</strong>,否则在断开 SSH 连接后，你就登陆不上服务器了。</li>
+</ul>
+<p>0x04. 测试所有用户连接: <code>ssh -p 0x04指定的端口 -i 证书位置 username@ip</code> 成功后进行下一步，不成功，请确认是否正确完成了上面的所有操作。 </p>
+<ul>
+<li>如果不行，可以用密码登陆 root 用户从头再来。</li>
+</ul>
+<p>0x05. 执行 0x01 </p>
+<ul>
+<li>找到 <code>PasswordAuthentication yes</code> 并将 yes 改为 no。</li>
+<li>执行 0x02</li>
+</ul>
+<p>0x06. 测试所有用户连接: <code>ssh -p 0x04指定的端口 username@ip</code> 拒绝密码登陆，成功后进行下一步，不成功，请确认是否正确完成了上面的所有操作。 </p>
+<ul>
+<li>如果报错 <code>Permission denied</code> 则证明成功可以使用 0x04 进行登陆。</li>
+<li>如果不行，请用密钥登陆 root 用户从头再来。</li>
+</ul>
+<p>0x07. 执行 0x01</p>
+<ul>
+<li>找到 <code>PermitRootLogin yes</code> 改为 no 禁止 root 用户登录。在重启 ssh 之前，请将你的 root 密码更改为简单容易记的。以后用密钥登陆服务器，su 的时候要用。</li>
+<li>执行 0x02</li>
+<li>原因：防止 SSH 端口被扫描到，别人进行 root 用户包跑（虽然，上面禁止了密码登陆，但是怕有的人觉得禁止密码登陆麻烦，还是留下这一步）。</li>
+</ul>
+<p>0x08. 测试 root 用户连接 <code>ssh -p 0x04指定的端口 root@ip</code></p>
+<ul>
+<li>如果报错 <code>Permission denied</code> 则证明成功。可以使用 0x04 登陆。</li>
+</ul>
+<h4 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h4><p>上面的设置从 SSH 层面做了以下几件事：</p>
+<ol>
+<li>更改默认的 SSH 端口，防止暴力 SSH 破解。</li>
+<li>更改了 SSH 登陆的方式：从密码登陆 -&gt; 只允许密钥登陆,防止了密码的泄露。</li>
+<li>更改了 SSH 登陆的用户限制，只允许非 root 用户登陆,防止了中间人攻击。</li>
+</ol>
+<p>而且新建的用户均无 sudo 的权限，这样 VPS 就具有了三层防护。基本可以防止 99% 的恶意攻击了。<br>另外，不方便更改 SSH 端口的用户，可以参考使用 fail2ban 工具。（有时间的话，单独写一篇教程）</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>VPS 安全防护的第一步：权限的隔离：包括用户权限——普通用户均不在 sudo 组中，文件的权限：登陆的密钥只允许用户的属主使用,防止了单个用户破解，进而导致系统全部暴漏。<br>VPS 安全防护的第二步：关闭不必要的端口，尽可能减少自己在公网上暴露的信息。即设置防火墙允许自己想要使用的端口，其余端口全部拒绝。<br>VPS 安全防护的第三步：更改 SSH 配置。以达到只能用非 root 用户，只能利用密钥从指定的端口登陆。最大限度的降低登陆用户遭破解，对系统造成的影响。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+    
+      <div>
+        
+
+
+<!-- JS库 clipboard 拷贝内容到粘贴板-->
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.1/clipboard.min.js"></script>
+
+<!-- JS库 sweetalert 显示提示信息-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<ul class="post-copyright">
+
+  <!-- 本文标题 -->
+  <li>
+    <strong>本文标题： </strong>
+    VPS 网络防护
+  </li>
+
+  <!-- 本文作者 -->
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>
+    佚
+  </li>
+
+  <!-- 创建时间 -->
+  <li>
+    <strong>创建于： </strong>
+    2020年03月22日 - 20时03分
+  </li>
+
+  <!-- 修改时间 -->
+  <li>
+    <strong>更新于： </strong>
+    2020年04月04日 - 21时04分
+  </li>
+
+  <!-- 引用链接 -->
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://muum.me/2020/03/22/VPS-网络防护/" title="VPS 网络防护">https://muum.me/2020/03/22/VPS-网络防护/</a>
+    <span class="copy-path" title="点击复制引用链接"><i style="cursor: pointer" class="fa fa-clipboard" data-clipboard-text="[佚's Blog | VPS 网络防护](https://muum.me/2020/03/22/VPS-网络防护/)" aria-label="复制成功"></i></span>
+  </li>
+
+  <!-- 版权声明 -->
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+<script>
+  var clipboard = new ClipboardJS('.fa-clipboard');
+  clipboard.on('success', function(target){
+    var message = document.createElement('div');
+    message.innerHTML = '<i class="fa fa-check-circle message-icon"></i><span class="message-content">' + target.trigger.getAttribute('aria-label') + '</span>';
+    swal({
+      content: message,
+      className: "copy-success-message",
+      timer: 1000,
+      button: false
+    });
+  });
+</script>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SSH/" rel="tag"># SSH</a>
+          
+            <a href="/tags/密钥登陆/" rel="tag"># 密钥登陆</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/06/queue/" rel="next" title="泛型链式队列的实现">
+                <i class="fa fa-chevron-left"></i> 泛型链式队列的实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/04/栈的简单使用总结/" rel="prev" title="栈的简单使用总结">
+                栈的简单使用总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://muumblog-1300224739.file.myqcloud.com/cbbw7-buakk.svg" alt="佚">
+            
+              <p class="site-author-name" itemprop="name">佚</p>
+              <p class="site-description motion-element" itemprop="description">上士闻道，勤而行之</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VPS-安全防护的原因"><span class="nav-number">1.</span> <span class="nav-text">VPS 安全防护的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VPS-防护的手段"><span class="nav-number">2.</span> <span class="nav-text">VPS 防护的手段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置防火墙"><span class="nav-number">3.</span> <span class="nav-text">设置防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装配置-ufw-防火墙工具"><span class="nav-number">3.1.</span> <span class="nav-text">安装配置 ufw 防火墙工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">3.1.1.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#私钥登陆"><span class="nav-number">4.</span> <span class="nav-text">私钥登陆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#私钥的生成"><span class="nav-number">4.1.</span> <span class="nav-text">私钥的生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置允许私钥登陆并进行-SSH-配置"><span class="nav-number">4.1.1.</span> <span class="nav-text">设置允许私钥登陆并进行 SSH 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小结-1"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">佚</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Dq2Otm3R7bknuHrJrXMwf8WV-gzGzoHsz',
+        appKey: 'vaAFRlOeeUIoksDgcUy1FRzh',
+        placeholder: '添加评论',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('3');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+    (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:1515016,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+
+
+</body>
+</html>
