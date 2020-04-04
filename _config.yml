@@ -97,6 +97,9 @@ mermaid: ## mermaid url https://github.com/knsv/mermaid
   options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js
   #startOnload: true  // default true
 
+# site_map
+plugins: hexo-generator-sitemap
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
