@@ -29,9 +29,9 @@
         <category>数据结构与算法</category>
       </categories>
       <tags>
-        <tag>链表</tag>
         <tag>队列</tag>
         <tag>泛型队列</tag>
+        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -42,9 +42,9 @@
         <category>数据结构与算法</category>
       </categories>
       <tags>
+        <tag>链表</tag>
         <tag>栈</tag>
         <tag>泛型栈</tag>
-        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
