@@ -82,6 +82,15 @@ search:
   format: html  # 指定页面内容形式，可选 html | raw (Markdown) | excerpt | more
   limit: 10000
 
+# Post wordcount display settings
+# Dependencies: https://github.com/theme-next/hexo-symbols-count-time
+symbols_count_time:
+  separated_meta: true
+  item_text_post: true
+  item_text_total: false
+  awl: 4
+  wpm: 275
+
 # mermaid chart
 mermaid: ## mermaid url https://github.com/knsv/mermaid
   enable: true  # default true
