@@ -102,7 +102,7 @@ plugins: hexo-generator-sitemap
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
-google_site_verification: xtzchGRx3xfRVCbiSLW5aB-XcQUpS5zHbn3HP72d8kys
+google_site_verification: R9rRJFvbywXQACp7V0DXf69fI9GtkkvWONPWgxat_5w
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
