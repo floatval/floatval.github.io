@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="单向循环链表在解决圆桌问题时,单向循环链表是一种非常合适的数据结构.因为,他可以循环计数. 节点设计节点需要两个元素:  数据域: 存放数据 指针域: 存放下一个节点的地址 链表为空时,头节点指向自己   1.2 均为私有,防止数据的意外修改 添加链表类为友元,实现链表对节点的操作  节点的实现node.hpp 1234567891011121314151617181920212223242526">
+<meta name="description" content="单向循环链表在解决圆桌问题时,单向循环链表是一种非常合适的数据结构.因为,他可以循环计数. 节点设计节点需要两个元素:  数据域: 存放数据 指针域: 存放下一个节点的地址 链表为空时,头节点指向自己   1.2 均为私有,防止数据的意外修改 添加链表类为友元,实现链表对节点的操作">
 <meta name="keywords" content="链表,使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单向循环链接及其应用">
 <meta property="og:url" content="https://muum.me/2020/04/05/单向循环链接及其应用/index.html">
 <meta property="og:site_name" content="君子慎独">
-<meta property="og:description" content="单向循环链表在解决圆桌问题时,单向循环链表是一种非常合适的数据结构.因为,他可以循环计数. 节点设计节点需要两个元素:  数据域: 存放数据 指针域: 存放下一个节点的地址 链表为空时,头节点指向自己   1.2 均为私有,防止数据的意外修改 添加链表类为友元,实现链表对节点的操作  节点的实现node.hpp 1234567891011121314151617181920212223242526">
+<meta property="og:description" content="单向循环链表在解决圆桌问题时,单向循环链表是一种非常合适的数据结构.因为,他可以循环计数. 节点设计节点需要两个元素:  数据域: 存放数据 指针域: 存放下一个节点的地址 链表为空时,头节点指向自己   1.2 均为私有,防止数据的意外修改 添加链表类为友元,实现链表对节点的操作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-07T14:07:46.158Z">
+<meta property="og:updated_time" content="2020-04-07T14:09:00.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单向循环链接及其应用">
-<meta name="twitter:description" content="单向循环链表在解决圆桌问题时,单向循环链表是一种非常合适的数据结构.因为,他可以循环计数. 节点设计节点需要两个元素:  数据域: 存放数据 指针域: 存放下一个节点的地址 链表为空时,头节点指向自己   1.2 均为私有,防止数据的意外修改 添加链表类为友元,实现链表对节点的操作  节点的实现node.hpp 1234567891011121314151617181920212223242526">
+<meta name="twitter:description" content="单向循环链表在解决圆桌问题时,单向循环链表是一种非常合适的数据结构.因为,他可以循环计数. 节点设计节点需要两个元素:  数据域: 存放数据 指针域: 存放下一个节点的地址 链表为空时,头节点指向自己   1.2 均为私有,防止数据的意外修改 添加链表类为友元,实现链表对节点的操作">
 
 
 
@@ -419,6 +419,7 @@
 <li>1.2 均为私有,防止数据的意外修改</li>
 <li>添加链表类为友元,实现链表对节点的操作</li>
 </ol>
+<a id="more"></a>
 <h2 id="节点的实现"><a href="#节点的实现" class="headerlink" title="节点的实现"></a>节点的实现</h2><p>node.hpp</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by yi on 2020/4/6.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> PART1_NODE_HPP</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PART1_NODE_HPP</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">circleList</span>;</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">friend</span> <span class="class"><span class="keyword">class</span> <span class="title">circleList</span>&lt;T&gt;;</span></span><br><span class="line">    Node(): m_pnext(<span class="literal">nullptr</span>)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    explicit Node(const T data, Node&lt;T&gt;* m_pnext= nullptr): m_data(data), m_pnext(m_pnext)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~Node()&#123;</span><br><span class="line">        m_pnext= <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    T m_data;</span><br><span class="line">    Node&lt;T&gt;* m_pnext;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//PART1_NODE_HPP</span></span></span><br></pre></td></tr></table></figure>
 
