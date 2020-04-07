@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="君子慎独">
 <meta property="og:description" content="单向循环链表在解决圆桌问题时,单向循环链表是一种非常合适的数据结构.因为,他可以循环计数. 节点设计节点需要两个元素:  数据域: 存放数据 指针域: 存放下一个节点的地址 链表为空时,头节点指向自己   1.2 均为私有,防止数据的意外修改 添加链表类为友元,实现链表对节点的操作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-07T14:09:00.941Z">
+<meta property="og:updated_time" content="2020-04-07T14:24:33.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单向循环链接及其应用">
 <meta name="twitter:description" content="单向循环链表在解决圆桌问题时,单向循环链表是一种非常合适的数据结构.因为,他可以循环计数. 节点设计节点需要两个元素:  数据域: 存放数据 指针域: 存放下一个节点的地址 链表为空时,头节点指向自己   1.2 均为私有,防止数据的意外修改 添加链表类为友元,实现链表对节点的操作">
@@ -464,8 +464,10 @@
 <li><p>删除元素时的边界问题:</p>
 <ol>
 <li>传入的元素索引不能为 0,规避删除头节点的风险</li>
-<li>传入的涌入索引,不能大于链表的长度</li>
+<li>传入的元素索引,不能大于链表的长度</li>
 </ol>
+</li>
+<li><p>size()+1, index-1 修正偏移量,可以通过让 size() 函数的返回值 + 1,来修正.从而忽略掉size() 函数外的偏移量修正 +1,-1</p>
 </li>
 </ol>
 
