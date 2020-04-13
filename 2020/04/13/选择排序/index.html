@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="君子慎独">
 <meta property="og:description" content="选择排序选择排序是一种非常常见的排序算法.他具有一个别的算法都不具备的优点特性:移动元素的次数最少,一共交换了 N 次.(用来排序的数组的大小)同时,他有也一个特有的缺点特性:无法利用输入元素的初试状态 即使输入的元素有序,他依然会从头到位一步不少的执行一遍自己的排序步骤.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-13T14:30:42.216Z">
+<meta property="og:updated_time" content="2020-04-13T14:48:41.991Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="选择排序">
 <meta name="twitter:description" content="选择排序选择排序是一种非常常见的排序算法.他具有一个别的算法都不具备的优点特性:移动元素的次数最少,一共交换了 N 次.(用来排序的数组的大小)同时,他有也一个特有的缺点特性:无法利用输入元素的初试状态 即使输入的元素有序,他依然会从头到位一步不少的执行一遍自己的排序步骤.">
@@ -429,6 +429,18 @@
 
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"select.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">4</span>] = &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    <span class="keyword">auto</span> *test = <span class="keyword">new</span> select&lt;<span class="keyword">int</span>&gt;;</span><br><span class="line">    select&lt;<span class="keyword">int</span>&gt;::sort(arr, <span class="number">4</span>);</span><br><span class="line">    test-&gt;show(arr, <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">if</span> (select&lt;<span class="keyword">int</span>&gt;::isSorted(arr, <span class="number">4</span>)) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"有序"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> same[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">if</span> (select&lt;<span class="keyword">int</span>&gt;::isSorted(same,<span class="number">3</span>))&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"有序"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>选择排序的实现,利用了快慢指针的思想.快慢指针的变种可以是多种多样的,比如:<br><code>给定两个数组,通过遍历来找出数组中最小、最大的元素</code></p>
+<ul>
+<li>选择排序的外循环: 慢指针</li>
+<li>选择排序的内循环: 快指针</li>
+</ul>
+<p>通过快慢指针的终止状态,可以实现排序,查找最大最小元素.</p>
+<ul>
+<li>升序: 快指针的终止状态: 当前无序数组中的最大元素</li>
+<li>降序: 快指针的终止撞停: 当前无序数组中的最小元素</li>
+<li>升序: 慢指针的终止状态: 当前数组为升序</li>
+<li>降序: 慢指针的终止撞动态: 当前数组为降序</li>
+</ul>
 
       
     </div>
@@ -673,7 +685,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#选择排序"><span class="nav-number">1.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API-设计"><span class="nav-number">2.</span> <span class="nav-text">API 设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">2.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">2.2.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#选择排序"><span class="nav-number">1.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API-设计"><span class="nav-number">2.</span> <span class="nav-text">API 设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">2.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">2.2.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.2.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
