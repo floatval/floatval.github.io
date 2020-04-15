@@ -77,7 +77,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="希尔排序,">
 
 
 
@@ -88,16 +88,18 @@
 
 
 
-<meta name="description" content="上士闻道，勤而行之">
-<meta property="og:type" content="website">
-<meta property="og:title" content="君子慎独">
-<meta property="og:url" content="https://muum.me/categories/数据结构与算法/index.html">
+<meta name="description" content="希尔排序为了解决在数组中的数据量较大时,插入排序的效率过低的问题. Donald Shell 在1985年提出了 希尔排序. 希尔排序是一种 缩小增量 排序的方法.  将无序的数组以固定的间隔 h 分割为不同的小数组 将各个分割的数组进行排序 现在大的数组已经分割为了 较小的数组 且 小数组内有序 达到了 插入排序 的理想状态: 数组较小,且部分有序.">
+<meta name="keywords" content="希尔排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="希尔排序">
+<meta property="og:url" content="https://muum.me/2020/04/15/希尔排序/index.html">
 <meta property="og:site_name" content="君子慎独">
-<meta property="og:description" content="上士闻道，勤而行之">
+<meta property="og:description" content="希尔排序为了解决在数组中的数据量较大时,插入排序的效率过低的问题. Donald Shell 在1985年提出了 希尔排序. 希尔排序是一种 缩小增量 排序的方法.  将无序的数组以固定的间隔 h 分割为不同的小数组 将各个分割的数组进行排序 现在大的数组已经分割为了 较小的数组 且 小数组内有序 达到了 插入排序 的理想状态: 数组较小,且部分有序.">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-15T14:49:53.990Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="君子慎独">
-<meta name="twitter:description" content="上士闻道，勤而行之">
+<meta name="twitter:title" content="希尔排序">
+<meta name="twitter:description" content="希尔排序为了解决在数组中的数据量较大时,插入排序的效率过低的问题. Donald Shell 在1985年提出了 希尔排序. 希尔排序是一种 缩小增量 排序的方法.  将无序的数组以固定的间隔 h 分割为不同的小数组 将各个分割的数组进行排序 现在大的数组已经分割为了 较小的数组 且 小数组内有序 达到了 插入排序 的理想状态: 数组较小,且部分有序.">
 
 
 
@@ -127,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://muum.me/categories/数据结构与算法/">
+  <link rel="canonical" href="https://muum.me/2020/04/15/希尔排序/">
 
 
 
 
 
-  <title>分类: 数据结构与算法 | 君子慎独</title>
+  <title>希尔排序 | 君子慎独</title>
   
 
 
@@ -152,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -288,209 +290,291 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>数据结构与算法<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://muum.me/2020/04/15/希尔排序/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="佚">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://muumblog-1300224739.file.myqcloud.com/cbbw7-buakk.svg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="君子慎独">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/04/15/希尔排序/" itemprop="url">
-              
-                <span itemprop="name">希尔排序</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">希尔排序</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-04-15T22:14:01+08:00" content="2020-04-15">
-          04-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-15T22:14:01+08:00">
+                2020-04-15
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/排序/" itemprop="url" rel="index">
+                    <span itemprop="name">排序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/15/希尔排序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/15/希尔排序/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/14/插入排序/" itemprop="url">
-              
-                <span itemprop="name">插入排序</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-04-14T22:17:31+08:00" content="2020-04-14">
-          04-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><p>为了解决在数组中的数据量较大时,插入排序的效率过低的问题. <code>Donald Shell</code> 在1985年提出了 <code>希尔排序</code>.</p>
+<p>希尔排序是一种 <strong>缩小增量</strong> 排序的方法.</p>
+<ol>
+<li>将无序的数组以固定的间隔 h 分割为不同的小数组</li>
+<li>将各个分割的数组进行排序</li>
+<li>现在大的数组已经分割为了 <strong>较小的数组</strong> 且 <strong>小数组内有序</strong></li>
+<li>达到了 <code>插入排序</code> 的理想状态: 数组较小,且部分有序.</li>
+</ol>
+<a id="more"></a>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h1 id="API-设计"><a href="#API-设计" class="headerlink" title="API 设计"></a>API 设计</h1><p>和前几个排序算法一样,同样的 API 封装为通用的排序算法.</p>
+<ul>
+<li>元素比较</li>
+<li>元素交换</li>
+<li>排序</li>
+<li>遍历输入数组</li>
+<li>判断数组是否有序</li>
+</ul>
+<p>myshell.hpp</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by yi on 2020/4/15.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> PART2_MYSHELL_HPP</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PART2_MYSHELL_HPP</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myshell</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(T arr[], <span class="keyword">const</span> <span class="keyword">size_t</span> &amp;&amp;size)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">isSorted</span><span class="params">(T arr[])</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">less</span><span class="params">(<span class="keyword">const</span> T &amp;v, <span class="keyword">const</span> T &amp;w)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">exch</span><span class="params">(T arr[], <span class="keyword">const</span> <span class="keyword">int</span> &amp;i, <span class="keyword">const</span> <span class="keyword">int</span> &amp;j)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(T arr[], <span class="keyword">const</span> <span class="keyword">size_t</span> &amp;&amp;size)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/13/选择排序/" itemprop="url">
-              
-                <span itemprop="name">选择排序</span>
-              
-            </a>
-        
-      </h2>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 进行希尔排序</span></span><br><span class="line"><span class="comment"> * @tparam T 进行排序的数组中元素的类型</span></span><br><span class="line"><span class="comment"> * @param arr 进行排序的数组的首地址</span></span><br><span class="line"><span class="comment"> * @param size 进行排序的数组的元素个数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> myshell&lt;T&gt;::sort(T *arr, <span class="keyword">const</span> <span class="keyword">size_t</span> &amp;&amp;size) &#123;</span><br><span class="line">    <span class="keyword">int</span> h = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">/*求出进行希尔排序的最佳 h 的大小*/</span></span><br><span class="line">    <span class="keyword">while</span> (h &lt; size / <span class="number">3</span>) &#123;</span><br><span class="line">        h = <span class="number">3</span> * h + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (h &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = h; i &lt; size; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt;= h &amp;&amp; less(*(arr + j), *(arr + (j - h))); j -= h) &#123;</span><br><span class="line">                exch(arr, j, j - h);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        h /= <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 判断数组是否有序,PS: 忽略了不定数量相等元素的情况</span></span><br><span class="line"><span class="comment"> * @tparam T 判断是否有序的数组中的元素的类型</span></span><br><span class="line"><span class="comment"> * @param arr 判断是否有序的数组的首地址</span></span><br><span class="line"><span class="comment"> * @return true：有序，false：无序</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">bool</span> myshell&lt;T&gt;::isSorted(T *arr) &#123;</span><br><span class="line">    <span class="keyword">auto</span> *temp = arr;</span><br><span class="line">    <span class="keyword">return</span> (*arr &lt; *(temp++));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 判断给定的两个元素的大小</span></span><br><span class="line"><span class="comment"> * @tparam T 元素的类型</span></span><br><span class="line"><span class="comment"> * @param v 待比较的元素</span></span><br><span class="line"><span class="comment"> * @param w 待比较的元素</span></span><br><span class="line"><span class="comment"> * @return true：v 小于 w，false： v 大于 w</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">bool</span> myshell&lt;T&gt;::less(<span class="keyword">const</span> T &amp;v, <span class="keyword">const</span> T &amp;w) &#123;</span><br><span class="line">    <span class="keyword">return</span> v &lt; w;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 交换给定的两个元素</span></span><br><span class="line"><span class="comment"> * @tparam T 数组中元素的类型</span></span><br><span class="line"><span class="comment"> * @param arr 数组的首地址</span></span><br><span class="line"><span class="comment"> * @param i 用于交换的元素的索引</span></span><br><span class="line"><span class="comment"> * @param j 用于交换的元素的索引</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> myshell&lt;T&gt;::exch(T *arr, <span class="keyword">const</span> <span class="keyword">int</span> &amp;i, <span class="keyword">const</span> <span class="keyword">int</span> &amp;j) &#123;</span><br><span class="line">    *(arr + i) ^= *(arr + j);</span><br><span class="line">    *(arr + j) ^= *(arr + i);</span><br><span class="line">    *(arr + i) ^= *(arr + j);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 遍历并打印给定的数组</span></span><br><span class="line"><span class="comment"> * @tparam T 用来遍历的数组中的元素的类型</span></span><br><span class="line"><span class="comment"> * @param arr 数组的首地址</span></span><br><span class="line"><span class="comment"> * @param size 数组中元素的数量</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">void</span> myshell&lt;T&gt;::show(T *arr, <span class="keyword">const</span> <span class="keyword">size_t</span> &amp;&amp;size) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *(arr + i);</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//PART2_MYSHELL_HPP</span></span></span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-04-13T22:29:24+08:00" content="2020-04-13">
-          04-13
-        </time>
-      </div>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><div class="note warning"><p>一定要记住一点: 希尔排序是 <strong>缩小增量排序</strong></p></div>
 
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/05/单向循环链接及其应用/" itemprop="url">
-              
-                <span itemprop="name">单向循环链接及其应用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-04-05T17:25:18+08:00" content="2020-04-05">
-          04-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/04/栈的简单使用总结/" itemprop="url">
-              
-                <span itemprop="name">栈的简单使用总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-04-04T22:57:42+08:00" content="2020-04-04">
-          04-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/01/06/queue/" itemprop="url">
-              
-                <span itemprop="name">泛型链式队列的实现</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-01-06T20:28:31+08:00" content="2020-01-06">
-          01-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/01/05/stack/" itemprop="url">
-              
-                <span itemprop="name">泛型动态栈</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-01-05T16:52:15+08:00" content="2020-01-05">
-          01-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<ol>
+<li>根据希尔排序的数学模型来选择适用于大多数情况的最优分割区间: h</li>
+<li>依照分割 h 来进行排序</li>
+<li>迭代最小分割 h 到出口条件 <code>h = 0</code></li>
+</ol>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+    
+      <div>
+        
+
+
+<!-- JS库 clipboard 拷贝内容到粘贴板-->
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.1/clipboard.min.js"></script>
+
+<!-- JS库 sweetalert 显示提示信息-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<ul class="post-copyright">
+
+  <!-- 本文标题 -->
+  <li>
+    <strong>本文标题： </strong>
+    希尔排序
+  </li>
+
+  <!-- 本文作者 -->
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>
+    佚
+  </li>
+
+  <!-- 创建时间 -->
+  <li>
+    <strong>创建于： </strong>
+    2020年04月15日 - 22时04分
+  </li>
+
+  <!-- 修改时间 -->
+  <li>
+    <strong>更新于： </strong>
+    2020年04月15日 - 22时04分
+  </li>
+
+  <!-- 引用链接 -->
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://muum.me/2020/04/15/希尔排序/" title="希尔排序">https://muum.me/2020/04/15/希尔排序/</a>
+    <span class="copy-path" title="点击复制引用链接"><i style="cursor: pointer" class="fa fa-clipboard" data-clipboard-text="[佚's Blog | 希尔排序](https://muum.me/2020/04/15/希尔排序/)" aria-label="复制成功"></i></span>
+  </li>
+
+  <!-- 版权声明 -->
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+<script>
+  var clipboard = new ClipboardJS('.fa-clipboard');
+  clipboard.on('success', function(target){
+    var message = document.createElement('div');
+    message.innerHTML = '<i class="fa fa-check-circle message-icon"></i><span class="message-content">' + target.trigger.getAttribute('aria-label') + '</span>';
+    swal({
+      content: message,
+      className: "copy-success-message",
+      timer: 1000,
+      button: false
+    });
+  });
+</script>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/希尔排序/" rel="tag"># 希尔排序</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/14/插入排序/" rel="next" title="插入排序">
+                <i class="fa fa-chevron-left"></i> 插入排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -498,6 +582,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -518,8 +609,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -581,6 +681,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#希尔排序"><span class="nav-number">1.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API-设计"><span class="nav-number">2.</span> <span class="nav-text">API 设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -744,6 +860,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
